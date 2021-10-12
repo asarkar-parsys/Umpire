@@ -128,13 +128,11 @@ include(cmake/SetupUmpireThirdParty.cmake)
 
 add_subdirectory(src)
 
-configure_file(
-  umpire-config.cmake.in
-  "${PROJECT_BINARY_DIR}/umpire-config.cmake" @ONLY)
-
-install(FILES
+configure_package_config_file(
+  "${PROJECT_SOURCE_DIR}/umpire-config.cmake.in"
   "${PROJECT_BINARY_DIR}/umpire-config.cmake"
-  DESTINATION share/umpire/cmake)
+  PATH_VARS CMAKE_INSTALL_PREFIX
+  INSTALL_DESTINATION lib/cmake/umpire)
 
 write_basic_package_version_file(
   ${PROJECT_BINARY_DIR}/umpire-config-version.cmake
