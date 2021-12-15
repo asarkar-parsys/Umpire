@@ -15,6 +15,17 @@ if (EXISTS ${SHROUD_EXECUTABLE})
   include(${CMAKE_CURRENT_BINARY_DIR}/SetupShroud.cmake)
 endif ()
 
+if (ENABLE_UMAP)
+  find_path( UMAP_INCLUDE_DIR
+    umap/umap.hpp
+    PATHS $(UMAP_INCLUDE_PATH)
+  )
+  find_library( UMAP_LIBRARY
+    libumap.a
+    PATHS $(UMAP_LIBRARY_PATH)
+  )
+endif()
+
 if (ENABLE_SLIC AND ENABLE_LOGGING)
   find_library( SLIC_LIBRARY
     libslic.a
@@ -60,6 +71,7 @@ blt_list_append(TO TPL_DEPS ELEMENTS cuda cuda_runtime IF ENABLE_CUDA)
 blt_list_append(TO TPL_DEPS ELEMENTS hip hip_runtime IF ENABLE_HIP)
 blt_list_append(TO TPL_DEPS ELEMENTS openmp IF ENABLE_OPENMP)
 blt_list_append(TO TPL_DEPS ELEMENTS mpi IF ENABLE_MPI)
+blt_list_append(TO TPL_DEPS ELEMENTS umap umap_runtime IF ENABLE_UMAP)
 
 foreach(dep ${TPL_DEPS})
     # If the target is EXPORTABLE, add it to the export set
