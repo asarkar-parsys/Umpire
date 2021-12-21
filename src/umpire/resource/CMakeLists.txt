@@ -30,6 +30,16 @@ if(UMPIRE_ENABLE_FILE_RESOURCE)
     FileMemoryResource.hpp
     FileMemoryResourceFactory.hpp
   )
+  set (umpire_resource_sources
+    ${umpire_resource_sources}
+    FileMemoryResource.cpp
+    FileMemoryResourceFactory.cpp
+  )
+  if(ENABLE_UMAP)
+    set (umpire_resource_depends
+      ${umpire_resource_depends}
+      umap)
+  endif()
 endif()
 
 set (umpire_resource_sources
@@ -45,14 +55,6 @@ if(UMPIRE_ENABLE_DEVELOPER_BENCHMARKS)
     ${umpire_resource_sources}
     NoOpMemoryResource.cpp
     NoOpResourceFactory.cpp
-  )
-endif()
-
-if(UMPIRE_ENABLE_FILE_RESOURCE)
-  set (umpire_resource_sources
-    ${umpire_resource_sources}
-    FileMemoryResource.cpp
-    FileMemoryResourceFactory.cpp
   )
 endif()
 
