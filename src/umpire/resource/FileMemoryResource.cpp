@@ -15,7 +15,10 @@
 #include <unistd.h>
 
 #include "umpire/util/Platform.hpp"
+#if defined(UMPIRE_ENABLE_UMAP)
+#warning Buiding with UMAP
 #include "umap/umap.h"
+#endif
 
 #if defined(UMPIRE_ENABLE_CUDA)
 #include <cuda_runtime_api.h>

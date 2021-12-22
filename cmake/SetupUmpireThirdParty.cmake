@@ -15,14 +15,14 @@ if (EXISTS ${SHROUD_EXECUTABLE})
   include(${CMAKE_CURRENT_BINARY_DIR}/SetupShroud.cmake)
 endif ()
 
-if (ENABLE_UMAP)
+if (UMPIRE_ENABLE_UMAP)
   if(NOT DEFINED ENV{UMAP_ROOT})
     message(FATAL_ERROR "UMAP_ROOT undefined") 
   endif	()  
   find_path( UMAP_INCLUDE_DIR
-    umap/umap.hpp
+    NAMES "umap/umap.h"
     PATHS ($ENV{UMAP_ROOT}/install/include)
-  )  
+  )
   find_library( UMAP_LIBRARY
     libumap.a
     PATHS ($ENV{UMAP_ROOT}/install/lib)

@@ -75,8 +75,6 @@ endif()
 #######################################
 # Options that depend on BLT Options
 #######################################
-cmake_dependent_option( UMPIRE_ENABLE_UMAP "Build Umpire with UMAP support" On
-                	"ENABLE_UMAP" Off )
 cmake_dependent_option( UMPIRE_ENABLE_CUDA "Build Umpire with CUDA support" On
                         "ENABLE_CUDA" Off )
 cmake_dependent_option( UMPIRE_ENABLE_HIP "Build Umpire with HIP" On
