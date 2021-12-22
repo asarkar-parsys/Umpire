@@ -15,6 +15,7 @@
 #include <unistd.h>
 
 #include "umpire/util/Platform.hpp"
+#include "umap/umap.h"
 
 #if defined(UMPIRE_ENABLE_CUDA)
 #include <cuda_runtime_api.h>

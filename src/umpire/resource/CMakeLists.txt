@@ -24,6 +24,14 @@ if(UMPIRE_ENABLE_DEVELOPER_BENCHMARKS)
   )
 endif()
 
+set (umpire_resource_sources
+  HostResourceFactory.cpp
+  MemoryResource.cpp
+  MemoryResourceRegistry.cpp
+  NullMemoryResource.cpp
+  NullMemoryResourceFactory.cpp
+)
+
 if(UMPIRE_ENABLE_FILE_RESOURCE)
   set (umpire_resource_headers
     ${umpire_resource_headers}
@@ -41,14 +49,6 @@ if(UMPIRE_ENABLE_FILE_RESOURCE)
       umap)
   endif()
 endif()
-
-set (umpire_resource_sources
-  HostResourceFactory.cpp
-  MemoryResource.cpp
-  MemoryResourceRegistry.cpp
-  NullMemoryResource.cpp
-  NullMemoryResourceFactory.cpp
-)
 
 if(UMPIRE_ENABLE_DEVELOPER_BENCHMARKS)
   set (umpire_resource_sources
