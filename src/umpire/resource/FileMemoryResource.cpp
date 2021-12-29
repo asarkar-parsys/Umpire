@@ -79,7 +79,7 @@ void* FileMemoryResource::allocate(std::size_t bytes)
   }
 
   // Using mmap
-  void* ptr{mmap(NULL, rounded_bytes, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)};
+  void* ptr{umap(NULL, rounded_bytes, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)};
   if (ptr == MAP_FAILED) {
     int errno_save = errno;
     remove(ss.str().c_str());
@@ -99,7 +99,7 @@ void FileMemoryResource::deallocate(void* ptr, std::size_t UMPIRE_UNUSED_ARG(siz
   // Find information about ptr for deallocation
   auto iter = m_size_map.find(ptr);
   // Unmap File
-  if (munmap(iter->first, iter->second->second) < 0) {
+  if (uunmap(iter->first, iter->second->second) < 0) {
     UMPIRE_ERROR("munmap Of File { " << iter->second->first.c_str() << " } Failed:" << strerror(errno));
   }
   // Remove File
