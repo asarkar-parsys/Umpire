@@ -27,9 +27,16 @@ if (UMPIRE_ENABLE_UMAP)
     libumap.a
     PATHS ($ENV{UMAP_ROOT}/install/lib)
   )
+  find_library( PTHREAD
+    libpthread.so.0
+  )
+  find_library( RT
+    librt.so
+  ) 
   blt_import_library(NAME umap
     INCLUDES ${UMAP_INCLUDE_DIR}
-    LIBRARIES ${UMAP_LIBRARY})
+    LIBRARIES ${UMAP_LIBRARY}
+    DEPENDS_ON ${PTHREAD} ${RT})
 endif()    
 
 if (ENABLE_SLIC AND ENABLE_LOGGING)
