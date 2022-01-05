@@ -78,8 +78,11 @@ void* FileMemoryResource::allocate(std::size_t bytes)
     UMPIRE_ERROR("truncate64 Of File { " << ss.str() << " } Failed: " << strerror(errno_save));
   }
 
-  // Using mmap
+#if defined(UMPIRE_ENABLE_UMAP)  // Using mmap
   void* ptr{umap(NULL, rounded_bytes, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)};
+#else
+  void* ptr{mmap(NULL, rounded_bytes, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)};
+#endif  
   if (ptr == MAP_FAILED) {
     int errno_save = errno;
     remove(ss.str().c_str());
@@ -98,8 +101,12 @@ void FileMemoryResource::deallocate(void* ptr, std::size_t UMPIRE_UNUSED_ARG(siz
 {
   // Find information about ptr for deallocation
   auto iter = m_size_map.find(ptr);
-  // Unmap File
+
+#if defined(UMPIRE_ENABLE_UMAP)  // Unmap File
   if (uunmap(iter->first, iter->second->second) < 0) {
+#else
+  if (munmap(iter->first, iter->second->second) < 0) {
+#endif
     UMPIRE_ERROR("munmap Of File { " << iter->second->first.c_str() << " } Failed:" << strerror(errno));
   }
   // Remove File
