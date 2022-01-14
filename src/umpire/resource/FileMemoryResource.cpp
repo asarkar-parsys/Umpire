@@ -79,7 +79,7 @@ void* FileMemoryResource::allocate(std::size_t bytes)
   }
 
 #if defined(UMPIRE_ENABLE_UMAP)  // Using mmap
-  void* ptr{umap(NULL, rounded_bytes, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)};
+  void* ptr{umap(NULL, rounded_bytes, PROT_READ | PROT_WRITE, MAP_PRIVATE, fd, 0)};
 #else
   void* ptr{mmap(NULL, rounded_bytes, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0)};
 #endif  
@@ -93,7 +93,12 @@ void* FileMemoryResource::allocate(std::size_t bytes)
   std::pair<const std::string, std::size_t> info{std::make_pair(ss.str(), rounded_bytes)};
   m_size_map.insert(ptr, info);
 
+#if defined(UMPIRE_ENABLE_UMAP)  // Using mmap
+  m_filefd[ss.str()] = fd;
+#else
   close(fd);
+#endif
+
   return ptr;
 }
 
@@ -109,6 +114,11 @@ void FileMemoryResource::deallocate(void* ptr, std::size_t UMPIRE_UNUSED_ARG(siz
 #endif
     UMPIRE_ERROR("munmap Of File { " << iter->second->first.c_str() << " } Failed:" << strerror(errno));
   }
+
+#if defined(UMPIRE_ENABLE_UMAP)  // close fd
+  ::close(m_filefd[iter->second->first.c_str()]); 
+  m_filefd.erase(iter->second->first.c_str());
+#endif
   // Remove File
   if (remove(iter->second->first.c_str()) < 0) {
     UMPIRE_ERROR("remove Of File { " << iter->second->first.c_str() << " } Failed: " << strerror(errno));

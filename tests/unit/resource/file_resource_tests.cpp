@@ -8,6 +8,7 @@
 #include <limits.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <iostream>
 
 #include "gtest/gtest.h"
 #include "resource_tests.hpp"
@@ -48,20 +49,24 @@ TYPED_TEST_P(ResourceTest, MmapFile)
 {
   std::size_t* ptr = nullptr;
   ASSERT_NO_THROW(ptr = (std::size_t*)this->memory_resource->allocate(1000000000ULL * sizeof(std::size_t)));
+  std::cout<<"Got here1"<<std::endl;
 
   std::size_t* start = ptr;
   for (int i = 0; i <= 9; i++) {
+    std::cout<<"writing "<<i<<std::endl;
     *start = (size_t)i;
     start += sizeof(size_t);
   }
+  std::cout<<"done writing"<<std::endl;
   start = ptr;
   for (int i = 0; i <= 9; i++) {
+    std::cout<<"teating read "<<i<<std::endl;
     if ((std::size_t)i != *start) {
       FAIL();
     }
     start += sizeof(size_t);
   }
-
+  std::cout<<"Done reading"<<std::endl;
   this->memory_resource->deallocate(ptr, 1000000000ULL * sizeof(std::size_t));
 }
 
