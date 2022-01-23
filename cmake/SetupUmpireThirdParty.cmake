@@ -24,7 +24,7 @@ if (UMPIRE_ENABLE_UMAP)
     PATHS ($ENV{UMAP_ROOT}/install/include)
   )
   find_library( UMAP_LIBRARY
-    libumap.a
+    libumap.so
     PATHS ($ENV{UMAP_ROOT}/install/lib)
   )
   #find_library( PTHREAD
