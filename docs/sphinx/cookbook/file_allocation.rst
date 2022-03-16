@@ -153,7 +153,7 @@ Once the system dependencies are met, follow the steps documented at the followi
 https://llnl-umap.readthedocs.io/en/develop/getting_started.html
 
 The following command lines should help you build UMPIRE with UMap. Please replace <Umap base directory>
-with the absolute path to UMap base directory.
+with the absolute path to UMap base directory:
 
 .. code-block:: bash
   $ export UMAP_ROOT=<Umap base directory>
@@ -171,12 +171,12 @@ provided below can be built.
 
 .. literalinclude:: ../../../examples/cookbook//recipe_filesystem_memory_read_write.cpp
 
-A command line like the following is all you need to build this app
+A command line like the following is all you need to build this app:
 
 .. code-block:: bash
   $ g++ -I<UMPIRE_ROOT>/Umpire/build/install/include test.c <UMPIRE_ROOT>/Umpire-test/Umpire/build/install/lib/libumpire.a <UMAP_ROOT>/umap/install/lib/libumap.a -lpthread -o testrun
 
-Additionally, Umpire's built-in file resource unit tests can also be run using
+Additionally, Umpire's built-in file resource unit tests can also be run using:
 
 .. code-block:: bash
   $<UMPIRE_ROOT>/Umpire/build/install/bin/file_resource_tests ##
