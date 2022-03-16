@@ -157,7 +157,7 @@ with the absolute path to UMap base directory:
 
 .. code-block:: bash
 
-  $ export UMAP_ROOT=<Umap base directory>
+  $ export UMAP_ROOT="Umap base directory"
   $ git clone https://github.com/asarkar-parsys/Umpire
   $ cd Umpire
   $ git checkout feature/integrate_umap_b2
@@ -176,13 +176,13 @@ A command line like the following is all you need to build this app:
 
 .. code-block:: bash
 
-  $ g++ -I<UMPIRE_ROOT>/Umpire/build/install/include test.c <UMPIRE_ROOT>/Umpire-test/Umpire/build/install/lib/libumpire.a <UMAP_ROOT>/umap/install/lib/libumap.a -lpthread -o testrun
+  $ g++ -I"UMPIRE_ROOT"/Umpire/build/install/include test.c "UMPIRE_ROOT"/Umpire-test/Umpire/build/install/lib/libumpire.a "UMAP_ROOT"/umap/install/lib/libumap.a -lpthread -o testrun
 
 Additionally, Umpire's built-in file resource unit tests can also be run using:
 
 .. code-block:: bash
 
-  $<UMPIRE_ROOT>/Umpire/build/install/bin/file_resource_tests ##
+  $ "UMPIRE_ROOT"/Umpire/build/install/bin/file_resource_tests ##
 
 Here "##" stands for the number of array elements wanted to be passed through the tands for the
 number of array elements wanted to be passed through the tests. This number can range from
