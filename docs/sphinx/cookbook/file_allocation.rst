@@ -187,3 +187,7 @@ Additionally, Umpire's built-in file resource unit tests can also be run using:
 Here "##" stands for the number of array elements wanted to be passed through the tands for the
 number of array elements wanted to be passed through the tests. This number can range from
 1-100,000,000,000. This number can range from 1-100,000,000,000.
+
+Users can submit an issue on spotting a problem while using Umpire with UMap at the following link: 
+
+https://github.com/LLNL/umap/issues
